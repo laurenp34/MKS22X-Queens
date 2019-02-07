@@ -10,9 +10,11 @@ public class QueenBoard {
 
   private boolean addQueen(int r, int c) {
     board[r][c] = 1;
+    return true;
   }
   private boolean removeQueen(int r, int c) {
     board[r][c] = 0;
+    return true;
   }
 
   public String toString() {
@@ -30,5 +32,9 @@ public class QueenBoard {
     return result;
   }
 
+  public static void main(String[] args) {
+    QueenBoard q = new QueenBoard(8);
+    System.out.println(q);
+  }
 
 }
