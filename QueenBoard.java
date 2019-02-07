@@ -16,6 +16,14 @@ public class QueenBoard {
     board[r][c] = 0;
     return true;
   }
+  //this method marks the lines of attack for a queen placed at r, c.
+  private boolean markAttack(int r, int c) {
+    int rows = board.length;
+    int cols = board[0].length;
+    for (int[] row: board) {
+      if (!)
+    }
+  }
 
   public String toString() {
     String result = "";
@@ -31,6 +39,14 @@ public class QueenBoard {
     }
     return result;
   }
+
+  public boolean solve() {
+    addQueen(0,0);
+    return solve(1,1)
+
+  }
+
+  public boolean solve(row,col)
 
   public static void main(String[] args) {
     QueenBoard q = new QueenBoard(8);
