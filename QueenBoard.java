@@ -21,8 +21,16 @@ public class QueenBoard {
     int rows = board.length;
     int cols = board[0].length;
     for (int[] row: board) {
-      if (!)
+      if (row[c] != 1) {
+        row[c] = -1;
+      }
     }
+    for (int i: board[r]) {
+      if (i != 1) {
+        i = -1;
+      }
+    }
+    return true;
   }
 
   public String toString() {
@@ -42,11 +50,13 @@ public class QueenBoard {
 
   public boolean solve() {
     addQueen(0,0);
-    return solve(1,1)
+    return true;
 
   }
 
-  public boolean solve(row,col)
+  public boolean solve(int row, int col){
+    return true;
+  }
 
   public static void main(String[] args) {
     QueenBoard q = new QueenBoard(8);
