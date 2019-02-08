@@ -20,14 +20,22 @@ public class QueenBoard {
   private boolean markAttack(int r, int c) {
     int rows = board.length;
     int cols = board[0].length;
+    //vertical
     for (int[] row: board) {
       if (row[c] != 1) {
         row[c] = -1;
       }
     }
+    //horizontal.
     for (int i=0;i<board[r].length;i++) {
       if (board[r][i] != 1) {
         board[r][i] = -1;
+      }
+    }
+    //diagonal up left.
+    for (int i=r,i2=c;i>=0&&i2<board[r].length;i--,i2++) {
+      if (board[i][i2] != 1) {
+        board[i][i2] = -1;
       }
     }
     return true;
