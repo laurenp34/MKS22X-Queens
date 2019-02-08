@@ -15,6 +15,7 @@ public class QueenBoard {
   }
   private boolean removeQueen(int r, int c) {
     board[r][c] = 0;
+    removeAttack(r,c);
     return true;
   }
 
@@ -126,7 +127,8 @@ public class QueenBoard {
   public boolean solve() {
     int[][] queens = new int[8][2];
     addQueen(0,0);
-    return true;
+    return solve(1,1,queens);
+    //return true;
 
   }
 
@@ -134,6 +136,7 @@ public class QueenBoard {
     if (col==board[row].length) {
       return false;
     }
+    for (int)
     return true;
   }
 
