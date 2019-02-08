@@ -68,37 +68,37 @@ public class QueenBoard {
     int cols = board[0].length;
     //vertical
     for (int[] row: board) {
-      if (row[c] != 1) {
+      if (row[c] <0) {
         row[c]++;
       }
     }
     //horizontal.
     for (int i=0;i<board[r].length;i++) {
-      if (board[r][i] != 1) {
+      if (board[r][i] <0) {
         board[r][i]++;
       }
     }
     //diagonal up right./>
     for (int i=r,i2=c;i>=0&&i2<board[r].length;i--,i2++) {
-      if (board[i][i2] != 1) {
+      if (board[i][i2] <0) {
         board[i][i2]++;
       }
     }
     //diagonal down left.</
     for (int i=r,i2=c;i2>=0&&i<board[r].length;i++,i2--) {
-      if (board[i][i2] != 1) {
+      if (board[i][i2] <0) {
         board[i][i2]++;
       }
     }
     //diagonal up left <\
     for (int i=r,i2=c;i>=0&&i2>=0;i--,i2--) {
-      if (board[i][i2] != 1) {
+      if (board[i][i2] <0) {
         board[i][i2]++;
       }
     }
     //diagonal down left \>
     for (int i=r,i2=c;i<board[r].length&&i2<board[r].length;i++,i2++) {
-      if (board[i][i2] != 1) {
+      if (board[i][i2] <0) {
         board[i][i2]++;
       }
     }
@@ -143,8 +143,8 @@ public class QueenBoard {
     q.addQueen(4,6);
     System.out.println(q);
     q.removeQueen(1,5);
+    q.removeAttack(1,5);
     System.out.println(q);
-    q.markAttack(4,6);
     System.out.println(q);
 
   }
