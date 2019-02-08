@@ -32,8 +32,14 @@ public class QueenBoard {
         board[r][i] = -1;
       }
     }
-    //diagonal up left.
+    //diagonal up right./>
     for (int i=r,i2=c;i>=0&&i2<board[r].length;i--,i2++) {
+      if (board[i][i2] != 1) {
+        board[i][i2] = -1;
+      }
+    }
+    //diagonal down left.</
+    for (int i=r,i2=c;i2>=0&&i<board[r].length;i++,i2--) {
       if (board[i][i2] != 1) {
         board[i][i2] = -1;
       }
