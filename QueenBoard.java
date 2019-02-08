@@ -25,9 +25,9 @@ public class QueenBoard {
         row[c] = -1;
       }
     }
-    for (int i: board[r]) {
-      if (i != 1) {
-        i = -1;
+    for (int i=0;i<board[r].length;i++) {
+      if (board[r][i] != 1) {
+        board[r][i] = -1;
       }
     }
     return true;
