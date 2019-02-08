@@ -42,7 +42,7 @@ public class QueenBoard {
         } if (i==-1) {
           result += "x";
         }
-        else {
+        if (i==0) {
           result += "_";
         }
       }
