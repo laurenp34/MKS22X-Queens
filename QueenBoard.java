@@ -39,7 +39,10 @@ public class QueenBoard {
       for (int i: row) {
         if (i==1) {
           result += "Q";
-        } else {
+        } if (i==-1) {
+          result += "x";
+        }
+        else {
           result += "_";
         }
       }
@@ -64,6 +67,8 @@ public class QueenBoard {
     q.addQueen(4,6);
     System.out.println(q);
     q.removeQueen(1,5);
+    System.out.println(q);
+    q.markAttack(4,6);
     System.out.println(q);
   }
 
