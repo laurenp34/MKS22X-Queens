@@ -111,7 +111,7 @@ public class QueenBoard {
       for (int i: row) {
         if (i==1) {
           result += "Q";
-        } if (i==-1) {
+        } if (i<=-1) {
           result += "x";
         }
         if (i==0) {
@@ -146,6 +146,7 @@ public class QueenBoard {
     System.out.println(q);
     q.markAttack(4,6);
     System.out.println(q);
+
   }
 
 }
