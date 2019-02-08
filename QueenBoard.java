@@ -44,6 +44,18 @@ public class QueenBoard {
         board[i][i2] = -1;
       }
     }
+    //diagonal up left <\
+    for (int i=r,i2=c;i>=0&&i2>=0;i--,i2--) {
+      if (board[i][i2] != 1) {
+        board[i][i2] = -1;
+      }
+    }
+    //diagonal down left \>
+    for (int i=r,i2=c;i<board[r].length&&i2<board[r].length;i++,i2++) {
+      if (board[i][i2] != 1) {
+        board[i][i2] = -1;
+      }
+    }
     return true;
   }
 
