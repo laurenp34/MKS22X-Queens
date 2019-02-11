@@ -136,7 +136,9 @@ public class QueenBoard {
     if (col==board[row].length) {
       return false;
     }
-    for (int)
+    for (int i=row;i<queens.length;i++) {
+      if ()
+    }
     return true;
   }
 
