@@ -1,6 +1,3 @@
-import java.util.*;
-import java.io.*;
-
 public class QueenBoard {
   private int[][] board;
 
@@ -135,16 +132,17 @@ public class QueenBoard {
     addQueen(0,0);
     return solve(1,1,queens,placed);
     //return true;
-if (row == board.length) {
-      return true;
-    }
+
   }
 
   public boolean solve(int row, int col, int[][] queens, int placed){
+    System.out.println("trying: "+row+","+col);
+
     if (row == board.length) {
+      System.out.println(this);
       return true;
     }
-    System.out.println("trying: "+row+","+col);
+
     if (col==board[row].length) {
       int lastQueenR = queens[placed-1][0];
       int lastQueenC = queens[placed-1][1];
@@ -154,9 +152,7 @@ if (row == board.length) {
       placed --;
 
       if (lastQueenC + 1 == board[0].length) {
-        return false;if (row == board.length) {
-      return true;
-    }
+        return false;
       } else {
         int newR = lastQueenR;
         int newC = lastQueenC + 1;
@@ -172,9 +168,7 @@ if (row == board.length) {
       }
 
     }
-
     if (row == board.length) {
-      System.out.println(Arrays.toString(queens));
       return true;
     }
     if (board[row][col] < 0) {
