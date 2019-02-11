@@ -132,15 +132,44 @@ public class QueenBoard {
 
   }
 
-  public boolean solve(int row, int col, int[] queens){
+  public boolean solve(int row, int col, int[][] queens, int placed){
     if (col==board[row].length) {
-      return false;
+      int lastQueenR = queens[placed-1][0];
+      int lastQueenC = queens[placed-1][1];
+      removeQueen(lastQueenR,lastQueenC);
+      queens[placed-1] = {0,0};
+      placed --;
+
+      if (lastQueenC + 1 == board[0].length) {
+        return false;
+      } else {
+        int newR = lastQueenR;
+        int newC = lastQueenC + 1;
+        for (int i=newC,i<board[0].length;i++) {
+          if (board[newR][i] >= 0) {
+            queens[placed] = {lastQueenR,i};
+            placed++;
+            return solve(newR+1,0,queens,placed);
+          }
+        }
+        return false;
+      }
+
     }
-    for (int i=row;i<queens.length;i++) {
-      if ()
+    if (row == board.length) {
+      return true;
     }
-    return true;
+    if (board[i][i2] < 0) {
+      return solve(row,col+1,queens);
+    } else {
+      placed ++;
+      queens[placed-1] = {row,col};
+      return solve(row+1,0,queens,placed);
+    }
+
+
   }
+
 
   public static void main(String[] args) {
     QueenBoard q = new QueenBoard(8);
