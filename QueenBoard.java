@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 public class QueenBoard {
   private int[][] board;
 
@@ -137,6 +140,7 @@ public class QueenBoard {
 
   public boolean solve(int row, int col, int[][] queens, int placed){
     System.out.println("trying: "+row+","+col);
+    System.out.println("Placed: "+Arrays.deepToString(queens));
     System.out.println(this);
 
     if (row == board.length) {
@@ -152,9 +156,7 @@ public class QueenBoard {
       queens[placed-1][1] = 0;
       placed --;
 
-      if (lastQueenC + 1 == board[0].length) {
-        return false;
-      } else {
+        //boolean found = false;
         int newR = lastQueenR;
         int newC = lastQueenC + 1;
         for (int i=newC;i<board[0].length;i++) {
@@ -166,10 +168,9 @@ public class QueenBoard {
             return solve(newR+1,0,queens,placed);
           }
         }
-        return false;
+        return solve(newR-1,8,queens,placed);
       }
 
-    }
     if (row == board.length) {
       return true;
     }
@@ -190,6 +191,7 @@ public class QueenBoard {
   public static void main(String[] args) {
     QueenBoard q = new QueenBoard(8);
     System.out.println(q.solve());
+    System.out.println(q);
 
   }
 
