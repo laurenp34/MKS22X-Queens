@@ -217,6 +217,71 @@ public class QueenBoard {
 
   }
 
+  public int countSolutions() {
+    int[][] queens = new int[board.length][2];
+    addQueen(0,0);
+    int placed = 1;
+    return countSolutions(1,1,queens,placed,false,0);
+  }
+
+  public int countSolutions(int row, int col, int[][] queens, int placed, boolean falseAlarm, int count) {
+
+    if (row == board.length) {
+      System.out.println(this);
+      count ++;
+      return countSolutions(row-1,board.length,queens,placed,true,count);
+    }
+
+    if (col==board.length) {
+
+      if (placed ==0) {
+        resetBoard();
+        return count;
+      }
+
+      if ((row==0 && !falseAlarm) || (row<0 && falseAlarm)) {
+        resetBoard();
+        return count;
+      }
+
+      int lastQueenR = queens[placed-1][0];
+      int lastQueenC = queens[placed-1][1];
+      removeQueen(lastQueenR,lastQueenC);
+      queens[placed-1][0] = 0;
+      queens[placed-1][1] = 0;
+      placed --;
+
+        //boolean found = false;
+        int newR = lastQueenR;
+        int newC = lastQueenC + 1;
+
+
+        for (int i=newC;i<board[0].length;i++) {
+
+          if (board[newR][i] >= 0) {
+            queens[placed][0] = lastQueenR;
+            queens[placed][1] = i;
+            placed++;
+            addQueen(lastQueenR,i);
+            return countSolutions(newR+1,0,queens,placed,false,count);
+          }
+        }
+        return countSolutions(newR-1,board.length,queens,placed,true,count);
+      }
+
+
+    if (board[row][col] < 0) {
+      return countSolutions(row,col+1,queens,placed,false,count);
+    } else {
+      placed ++;
+      queens[placed-1][0] = row;
+      queens[placed-1][1] = col;
+      addQueen(row,col);
+      return countSolutions(row+1,0,queens,placed,false,count);
+    }
+
+  }
+
 
   public static void main(String[] args) {
     QueenBoard q = new QueenBoard(11);
@@ -224,7 +289,9 @@ public class QueenBoard {
     QueenBoard r = new QueenBoard(3);
     System.out.println(r.solve());
     System.out.println(r);
-    System.out.println(q.solve());
+
+    QueenBoard s = new QueenBoard(8);
+    System.out.println(q.countSolutions());
 
   }
 
