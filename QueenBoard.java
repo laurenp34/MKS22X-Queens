@@ -22,6 +22,12 @@ public class QueenBoard {
     return true;
   }
 
+  private boolean resetBoard() {
+    int[][] board2 = new int[board.length][board.length];
+    board = board2;
+    return true;
+  }
+
   //this method marks the lines of attack for a queen placed at r, c.
   //a square under attack will have value < 0 and will be -1 * # of times being attacked.
   private boolean markAttack(int r, int c) {
@@ -128,6 +134,14 @@ public class QueenBoard {
   }
 
   public boolean solve() {
+
+    for (int[] row: board) {
+      for (int i: row) {
+        if (i != 0) {
+          throw new IllegalStateException("board can only have zeroes.");
+        }
+      }
+    }
     int[][] queens = new int[board.length][2];
     queens[0][0] = 0;
     queens[0][1] = 0;
@@ -153,10 +167,12 @@ public class QueenBoard {
     if (col==board.length) {
 
       if (placed ==0) {
+        resetBoard();
         return false;
       }
 
       if ((row==0 && !falseAlarm) || (row<0 && falseAlarm)) {
+        resetBoard();
         return false;
       }
 
@@ -208,6 +224,7 @@ public class QueenBoard {
     QueenBoard r = new QueenBoard(3);
     System.out.println(r.solve());
     System.out.println(r);
+    System.out.println(q.solve());
 
   }
 
