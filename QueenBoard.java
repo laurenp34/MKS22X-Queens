@@ -226,6 +226,12 @@ public class QueenBoard {
 
   public int countSolutions(int row, int col, int[][] queens, int placed, boolean falseAlarm, int count) {
 
+    System.out.println("trying: "+row+","+col);
+    System.out.println("Placed: "+Arrays.deepToString(queens));
+    System.out.println("placed: "+placed);
+    System.out.println(falseAlarm);
+    System.out.println(this);
+
     if (row == board.length) {
       System.out.println(this);
       count ++;
@@ -291,7 +297,7 @@ public class QueenBoard {
     System.out.println(r);
 
     QueenBoard s = new QueenBoard(8);
-    System.out.println(q.countSolutions());
+    System.out.println(s.countSolutions());
 
   }
 
