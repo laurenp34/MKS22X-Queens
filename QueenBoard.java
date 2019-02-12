@@ -137,6 +137,7 @@ public class QueenBoard {
 
   public boolean solve(int row, int col, int[][] queens, int placed){
     System.out.println("trying: "+row+","+col);
+    System.out.println(this);
 
     if (row == board.length) {
       System.out.println(this);
@@ -161,6 +162,7 @@ public class QueenBoard {
             queens[placed][0] = lastQueenR;
             queens[placed][1] = i;
             placed++;
+            addQueen(lastQueenR,i);
             return solve(newR+1,0,queens,placed);
           }
         }
@@ -177,6 +179,7 @@ public class QueenBoard {
       placed ++;
       queens[placed-1][0] = row;
       queens[placed-1][1] = col;
+      addQueen(row,col);
       return solve(row+1,0,queens,placed);
     }
 
@@ -186,14 +189,7 @@ public class QueenBoard {
 
   public static void main(String[] args) {
     QueenBoard q = new QueenBoard(8);
-    q.addQueen(1,5);
-    q.addQueen(4,6);
-    System.out.println(q);
-    q.removeQueen(1,5);
-    q.removeAttack(1,5);
-    System.out.println(q);
-    System.out.println(q);
-    q.solve();
+    System.out.println(q.solve());
 
   }
 
