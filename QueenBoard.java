@@ -170,7 +170,7 @@ public class QueenBoard {
     }
     int column;
     if (del) {
-      column = cols[row-1] + 1;
+      column = lastCol + 1;
     } else {
       column = 0;
     }
@@ -184,9 +184,10 @@ public class QueenBoard {
       }
     }
     System.out.println("removing queen @"+(row-1)+","+lastCol);
-    removeQueen(row-1,lastCol);
+    removeQueen(row-1,cols[row-2]);
+    int last = cols[row-2];
     cols[row-2] = 0;
-    return solve2(row-1,lastCol,cols,true);
+    return solve2(row-1,last,cols,true);
   }
 
   public boolean solve(int row, int col, int[][] queens, int placed,boolean falseAlarm){
@@ -327,7 +328,7 @@ public class QueenBoard {
 
 
   public static void main(String[] args) {
-    QueenBoard q = new QueenBoard(8);
+    QueenBoard q = new QueenBoard(15);
     q.solve2();
     System.out.println(q);
 
