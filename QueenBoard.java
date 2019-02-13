@@ -170,12 +170,15 @@ public class QueenBoard {
     if (row == board.length) {
       return true; //return true if it's gotten through every row and to the end.
     }
+    /*
     int column;
     if (del) { // del represents if the previous call deleted a queen.
       column = lastCol + 1; // start only from where you left off with the deleted queen.
     } else {
       column = 0;
     }
+    */
+    int column = 0;
     for (int col=column;col<board[row].length;col++) { // for every square in the row:
       System.out.println("testing: "+row+","+col);
 
@@ -186,13 +189,13 @@ public class QueenBoard {
         cols[row-1] = col; // add the queens column to cols.
         if (solve2(row+1,col,cols,false)) {
           return true;
-        } // recursive call to next row, del is false because we didn't remove a queen.
-        removeQueen(row-1,cols[row-2]);
-        int last = cols[row-2]; // store last because you need to know which col to start off in the prev row for next call.
-        cols[row-2] = 0;
-        //return solve2(row-1,last,cols,true); // del becomes true because you want to start the next recursive call at cols+1
-        return false;
-      }
+        }
+        System.out.println("removing @ "+(row)+", "+cols[row-1]);
+        removeQueen(row,cols[row-1]);
+        col = cols[row-1]; // store last because you need to know which col to start off in the prev row for next call.
+        cols[row-1] = 0;
+      } // recursive call to next row, del is false because we didn't remove a queen.
+
     }
 
     /*
