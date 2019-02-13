@@ -184,17 +184,27 @@ public class QueenBoard {
         System.out.print("added\n");
         addQueen(row,col); // add the queen there.
         cols[row-1] = col; // add the queens column to cols.
-        return solve2(row+1,col,cols,false); // recursive call to next row, del is false because we didn't remove a queen.
+        if (solve2(row+1,col,cols,false)) {
+          return true;
+        } // recursive call to next row, del is false because we didn't remove a queen.
+        removeQueen(row-1,cols[row-2]);
+        int last = cols[row-2]; // store last because you need to know which col to start off in the prev row for next call.
+        cols[row-2] = 0;
+        //return solve2(row-1,last,cols,true); // del becomes true because you want to start the next recursive call at cols+1
+        return false;
       }
     }
 
+    /*
     //if it passed through the entire rest of the column and didn't add any queens:
     System.out.println("removing queen @"+(row-1)+","+cols[row-2]);
     //remove the previous queen.
     removeQueen(row-1,cols[row-2]);
     int last = cols[row-2]; // store last because you need to know which col to start off in the prev row for next call.
     cols[row-2] = 0;
-    return solve2(row-1,last,cols,true); // del becomes true because you want to start the next recursive call at cols+1
+    */
+    //return solve2(row-1,last,cols,true); // del becomes true because you want to start the next recursive call at cols+1
+    return false;
   }
 
   public boolean solve(int row, int col, int[][] queens, int placed,boolean falseAlarm){
