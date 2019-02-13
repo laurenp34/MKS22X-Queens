@@ -161,6 +161,7 @@ public class QueenBoard {
 
   public boolean solve2(int row, int lastCol, int[] cols, boolean del) {
     System.out.println(this);
+    System.out.println(Arrays.toString(cols));
     if (row == -1) {
       return false;
     }
@@ -169,7 +170,7 @@ public class QueenBoard {
     }
     int column;
     if (del) {
-      column = (row-1) + 1;
+      column = cols[row-1] + 1;
     } else {
       column = 0;
     }
@@ -179,13 +180,13 @@ public class QueenBoard {
         System.out.print("added\n");
         addQueen(row,col);
         cols[row-1] = col;
-        return solve2(row+1,col,false);
+        return solve2(row+1,col,cols,false);
       }
     }
     System.out.println("removing queen @"+(row-1)+","+lastCol);
     removeQueen(row-1,lastCol);
     cols[row-2] = 0;
-    return solve2(row-1,lastCol,true);
+    return solve2(row-1,lastCol,cols,true);
   }
 
   public boolean solve(int row, int col, int[][] queens, int placed,boolean falseAlarm){
