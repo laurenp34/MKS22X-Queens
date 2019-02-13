@@ -160,8 +160,9 @@ public class QueenBoard {
   }
 
   public boolean solve2(int row, int lastCol, int[] cols, boolean del) {
-    System.out.println(this);
-    System.out.println(Arrays.toString(cols));
+    //System.out.println(this);
+    //System.out.println(Arrays.toString(cols));
+    //System.out.println("row: "+row);
     if (row == -1) {
       return false;
     }
@@ -175,15 +176,15 @@ public class QueenBoard {
       column = 0;
     }
     for (int col=column;col<board[row].length;col++) {
-      System.out.println("testing: "+row+","+col);
+      //System.out.println("testing: "+row+","+col);
       if (board[row][col] == 0) {
-        System.out.print("added\n");
+        //System.out.print("added\n");
         addQueen(row,col);
         cols[row-1] = col;
         return solve2(row+1,col,cols,false);
       }
     }
-    System.out.println("removing queen @"+(row-1)+","+lastCol);
+    //System.out.println("removing queen @"+(row-1)+","+lastCol);
     removeQueen(row-1,cols[row-2]);
     int last = cols[row-2];
     cols[row-2] = 0;
@@ -328,8 +329,8 @@ public class QueenBoard {
 
 
   public static void main(String[] args) {
-    QueenBoard q = new QueenBoard(15);
-    q.solve2();
+    QueenBoard q = new QueenBoard(20);
+    System.out.println(q.solve2());
     System.out.println(q);
 
   }
