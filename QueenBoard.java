@@ -154,11 +154,12 @@ public class QueenBoard {
 
   public boolean solve2() {
     addQueen(0,0);
-    int[][] queens = new int[board.length][2];
-    return solve2(1,0,queens);
+    int[] cols = new int[board.length];
+    cols[0] = 1;
+    return solve2(1,0,cols,false);
   }
 
-  public boolean solve2(int row, int lastCol, int[][] queens) {
+  public boolean solve2(int row, int lastCol, int[] cols, boolean del) {
     System.out.println(this);
     if (row == -1) {
       return false;
@@ -166,17 +167,25 @@ public class QueenBoard {
     if (row == board.length) {
       return true;
     }
-    for (int col=0;col<board[row].length;col++) {
+    int column;
+    if (del) {
+      column = (row-1) + 1;
+    } else {
+      column = 0;
+    }
+    for (int col=column;col<board[row].length;col++) {
       System.out.println("testing: "+row+","+col);
       if (board[row][col] == 0) {
         System.out.print("added\n");
         addQueen(row,col);
-        return solve2(row+1,col,queens);
+        cols[row-1] = col;
+        return solve2(row+1,col,false);
       }
     }
     System.out.println("removing queen @"+(row-1)+","+lastCol);
     removeQueen(row-1,lastCol);
-    return solve2(row-1,lastCol,queens);
+    cols[row-2] = 0;
+    return solve2(row-1,lastCol,true);
   }
 
   public boolean solve(int row, int col, int[][] queens, int placed,boolean falseAlarm){
