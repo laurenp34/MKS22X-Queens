@@ -133,7 +133,7 @@ public class QueenBoard {
     return result;
   }
 
-  public boolean solve() {
+  public boolean solve2() {
 
     for (int[] row: board) {
       for (int i: row) {
@@ -160,9 +160,11 @@ public class QueenBoard {
   }
 
   public boolean solve2(int row, int lastCol, int[] cols, boolean del) {
+    /*
     System.out.println(this);
     System.out.println(Arrays.toString(cols));
     System.out.println("row: "+row);
+    */
 
     if (row == -1) {
       return false; //because when row 0 gets to the end (all scenarios built from there are tested), row becomes 0.
@@ -180,17 +182,17 @@ public class QueenBoard {
     */
     int column = 0;
     for (int col=column;col<board[row].length;col++) { // for every square in the row:
-      System.out.println("testing: "+row+","+col);
+      //System.out.println("testing: "+row+","+col);
 
       //if square is unoccupied and unattacked (free):
       if (board[row][col] == 0) {
-        System.out.print("added\n");
+        //System.out.print("added\n");
         addQueen(row,col); // add the queen there.
         cols[row-1] = col; // add the queens column to cols.
         if (solve2(row+1,col,cols,false)) {
           return true;
         }
-        System.out.println("removing @ "+(row)+", "+cols[row-1]);
+        //System.out.println("removing @ "+(row)+", "+cols[row-1]);
         removeQueen(row,cols[row-1]);
         col = cols[row-1]; // store last because you need to know which col to start off in the prev row for next call.
         cols[row-1] = 0;
@@ -210,7 +212,7 @@ public class QueenBoard {
     return false;
   }
 
-  public boolean solve(int row, int col, int[][] queens, int placed,boolean falseAlarm){
+  public boolean solve2(int row, int col, int[][] queens, int placed,boolean falseAlarm){
     //System.out.println("trying: "+row+","+col);
     //System.out.println("Placed: "+Arrays.deepToString(queens));
     //System.out.println("placed: "+placed);
@@ -253,23 +255,23 @@ public class QueenBoard {
             queens[placed][1] = i;
             placed++;
             addQueen(lastQueenR,i);
-            return solve(newR+1,0,queens,placed,false);
+            return solve2(newR+1,0,queens,placed,false);
           }
         }
-        return solve(newR-1,board.length,queens,placed,true);
+        return solve2(newR-1,board.length,queens,placed,true);
       }
 
     if (row == board.length) {
       return true;
     }
     if (board[row][col] < 0) {
-      return solve(row,col+1,queens,placed,false);
+      return solve2(row,col+1,queens,placed,false);
     } else {
       placed ++;
       queens[placed-1][0] = row;
       queens[placed-1][1] = col;
       addQueen(row,col);
-      return solve(row+1,0,queens,placed,false);
+      return solve2(row+1,0,queens,placed,false);
     }
 
 
@@ -284,11 +286,13 @@ public class QueenBoard {
 
   public int countSolutions(int row, int col, int[][] queens, int placed, boolean falseAlarm, int count) {
 
+    /*/
     System.out.println("trying: "+row+","+col);
     System.out.println("Placed: "+Arrays.deepToString(queens));
     System.out.println("placed: "+placed);
     System.out.println(falseAlarm);
     System.out.println(this);
+    */
 
     if (row == board.length) {
       System.out.println(this);
@@ -348,7 +352,7 @@ public class QueenBoard {
 
 
   public static void main(String[] args) {
-    QueenBoard q = new QueenBoard(15);
+    QueenBoard q = new QueenBoard(30);
     System.out.println(q.solve2());
     System.out.println(q);
 
