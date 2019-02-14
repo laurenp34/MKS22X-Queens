@@ -147,19 +147,19 @@ public class QueenBoard {
     queens[0][1] = 0;
     int placed = 1;
     addQueen(0,0);
-    return solve(1,1,queens,placed,false);
+    return solve2(1,1,queens,placed,false);
     //return true;
 
   }
 
-  public boolean solve2() {
+  public boolean solve() {
     addQueen(0,0);
     int[] cols = new int[board.length];
     cols[0] = 1;
-    return solve2(1,0,cols,false);
+    return solve(1,0,cols,false);
   }
 
-  public boolean solve2(int row, int lastCol, int[] cols, boolean del) {
+  public boolean solve(int row, int lastCol, int[] cols, boolean del) {
     /*
     System.out.println(this);
     System.out.println(Arrays.toString(cols));
@@ -189,7 +189,7 @@ public class QueenBoard {
         //System.out.print("added\n");
         addQueen(row,col); // add the queen there.
         cols[row-1] = col; // add the queens column to cols.
-        if (solve2(row+1,col,cols,false)) {
+        if (solve(row+1,col,cols,false)) {
           return true;
         }
         //System.out.println("removing @ "+(row)+", "+cols[row-1]);
@@ -352,8 +352,8 @@ public class QueenBoard {
 
 
   public static void main(String[] args) {
-    QueenBoard q = new QueenBoard(30);
-    System.out.println(q.solve2());
+    QueenBoard q = new QueenBoard(50);
+    System.out.println(q.solve());
     System.out.println(q);
 
   }
