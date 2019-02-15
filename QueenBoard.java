@@ -214,8 +214,10 @@ public class QueenBoard {
         }
       }
       if (!solve()) {
+        resetBoard();
         return 0;
       }
+      resetBoard();
 
       int[] cols = new int[board.length];
       return countSolutions(0,0,cols,false);
@@ -585,7 +587,7 @@ public class QueenBoard {
 
   }
   */
-
+/*
   public int countSolutions2() {
 
     for (int[] row: board) {
@@ -624,7 +626,7 @@ public class QueenBoard {
     } else {
       column = 0;
     }
-    */
+    */ /*
     int column = 0;
     for (int col=column;col<board[row].length;col++) { // for every square in the row:
       //System.out.println("testing: "+row+","+col);
@@ -653,17 +655,21 @@ public class QueenBoard {
     */
     //return solve2(row-1,last,cols,true); // del becomes true because you want to start the next recursive call at cols+1
     //resetBoard();
+    /*
     return count;
   }
-
+*/
 
   public static void main(String[] args) {
-    QueenBoard q = new QueenBoard(4);
+    QueenBoard q = new QueenBoard(7);
     System.out.println(q.solve());
     q.resetBoard();
     //System.out.println(q.solve());
     System.out.println(q);
     System.out.println(q.countSolutions());
+    System.out.println(q.countSolutions());
+    
+    System.out.println(q);
 
   }
 
