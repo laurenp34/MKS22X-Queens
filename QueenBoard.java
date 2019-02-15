@@ -204,12 +204,12 @@ public class QueenBoard {
     return false;
   }
 
-    public int solve2() {
+    public int countSolutions() {
       int[] cols = new int[board.length];
-      return solve2(0,0,cols,false);
+      return countSolutions(0,0,cols,false);
     }
 
-    public int solve2(int row, int lastCol, int[] cols, boolean del) {
+    public int countSolutions(int row, int lastCol, int[] cols, boolean del) {
 
       /*
       System.out.println(this);
@@ -242,7 +242,7 @@ public class QueenBoard {
           //System.out.print("added\n");
           addQueen(row,col); // add the queen there.
           cols[row] = col; // add the queens column to cols.
-          count += solve2(row+1,0,cols,false);
+          count += countSolutions(row+1,0,cols,false);
           //System.out.println("removing @ "+(row)+", "+cols[row-1]);
           removeQueen(row,cols[row]);
           //col = cols[row]; // store last because you need to know which col to start off in the prev row for next call.
@@ -573,7 +573,7 @@ public class QueenBoard {
   }
   */
 
-  public int countSolutions() {
+  public int countSolutions2() {
 
     for (int[] row: board) {
       for (int i: row) {
@@ -585,10 +585,10 @@ public class QueenBoard {
 
     int[] cols = new int[board.length];
     //addQueen(0,0);
-    return countSolutions(0,0,cols,false);
+    return countSolutions2(0,0,cols,false);
   }
 
-  public int countSolutions(int row, int lastCol, int[] cols, boolean del) {
+  public int countSolutions2(int row, int lastCol, int[] cols, boolean del) {
 
     //System.out.println(this);
     //System.out.println(Arrays.toString(cols));
@@ -620,7 +620,7 @@ public class QueenBoard {
       //  System.out.print("added\n");
         addQueen(row,col); // add the queen there.
         cols[row] = col; // add the queens column to cols.
-        count += countSolutions(row+1,lastCol,cols,false);
+        count += countSolutions2(row+1,lastCol,cols,false);
         //System.out.println("removing @ "+(row)+", "+cols[row]);
         removeQueen(row,cols[row]);
         //col = cols[row-1]; // store last because you need to know which col to start off in the prev row for next call.
@@ -644,11 +644,11 @@ public class QueenBoard {
 
 
   public static void main(String[] args) {
-    QueenBoard q = new QueenBoard(5);
+    QueenBoard q = new QueenBoard(15);
     System.out.println(q.solve());
     q.resetBoard();
     //System.out.println(q.solve());
-    System.out.println(q.solve2());
+    System.out.println(q.countSolutions());
     System.out.println(q);
 
   }
