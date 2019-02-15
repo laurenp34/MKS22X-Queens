@@ -132,7 +132,7 @@ public class QueenBoard {
     }
     return result;
   }
-
+/*
   public boolean solve2() {
 
     for (int[] row: board) {
@@ -150,7 +150,7 @@ public class QueenBoard {
     return solve2(1,1,queens,placed,false);
     //return true;
 
-  }
+  }*/
 
   public boolean solve() {
     addQueen(0,0);
@@ -161,9 +161,11 @@ public class QueenBoard {
 
   public boolean solve(int row, int lastCol, int[] cols, boolean del) {
 
+    /*
     System.out.println(this);
     System.out.println(Arrays.toString(cols));
     System.out.println("row: "+row);
+    */
 
 
     if (row == -1) {
@@ -182,23 +184,72 @@ public class QueenBoard {
     */
     int column = 0;
     for (int col=column;col<board[row].length;col++) { // for every square in the row:
-      System.out.println("testing: "+row+","+col);
+      //System.out.println("testing: "+row+","+col);
 
       //if square is unoccupied and unattacked (free):
       if (board[row][col] == 0) {
-        System.out.print("added\n");
+        //System.out.print("added\n");
         addQueen(row,col); // add the queen there.
         cols[row-1] = col; // add the queens column to cols.
         if (solve(row+1,col,cols,false)) {
           return true;
         }
-        System.out.println("removing @ "+(row)+", "+cols[row-1]);
+        //System.out.println("removing @ "+(row)+", "+cols[row-1]);
         removeQueen(row,cols[row-1]);
         col = cols[row-1]; // store last because you need to know which col to start off in the prev row for next call.
         cols[row-1] = 0;
       } // recursive call to next row, del is false because we didn't remove a queen.
 
     }
+    return false;
+  }
+
+    public int solve2() {
+      int[] cols = new int[board.length];
+      return solve2(0,0,cols,false);
+    }
+
+    public int solve2(int row, int lastCol, int[] cols, boolean del) {
+
+      /*
+      System.out.println(this);
+      System.out.println(Arrays.toString(cols));
+      System.out.println("row: "+row);
+      */
+
+
+      if (row == -1) {
+        return 0; //because when row 0 gets to the end (all scenarios built from there are tested), row becomes 0.
+      }
+      if (row == board.length) {
+        return 1; //return true if it's gotten through every row and to the end.
+      }
+      /*
+      int column;
+      if (del) { // del represents if the previous call deleted a queen.
+        column = lastCol + 1; // start only from where you left off with the deleted queen.
+      } else {
+        column = 0;
+      }
+      */
+      int column = 0;
+      int count = 0;
+      for (int col=column;col<board[row].length;col++) { // for every square in the row:
+        //System.out.println("testing: "+row+","+col);
+
+        //if square is unoccupied and unattacked (free):
+        if (board[row][col] == 0) {
+          //System.out.print("added\n");
+          addQueen(row,col); // add the queen there.
+          cols[row] = col; // add the queens column to cols.
+          count += solve2(row+1,0,cols,false);
+          //System.out.println("removing @ "+(row)+", "+cols[row-1]);
+          removeQueen(row,cols[row]);
+          //col = cols[row]; // store last because you need to know which col to start off in the prev row for next call.
+          cols[row] = 0;
+        } // recursive call to next row, del is false because we didn't remove a queen.
+
+      }
 
     /*
     //if it passed through the entire rest of the column and didn't add any queens:
@@ -209,7 +260,7 @@ public class QueenBoard {
     cols[row-2] = 0;
     */
     //return solve2(row-1,last,cols,true); // del becomes true because you want to start the next recursive call at cols+1
-    return false;
+    return count;
   }
 
   private int getLastRow() {
@@ -233,7 +284,7 @@ public class QueenBoard {
       return -1;
     }
 
-
+/*
   public int countSolutions2() {
     addQueen(0,0);
     int[] cols = new int[board.length];
@@ -247,7 +298,7 @@ public class QueenBoard {
     System.out.println(Arrays.toString(cols));
     System.out.println("row: "+row);
     */
-
+/*
     if (row == -1) {
       return count; //because when row 0 gets to the end (all scenarios built from there are tested), row becomes 0.
     }
@@ -261,7 +312,7 @@ public class QueenBoard {
     } else {
       column = 0;
     }
-    */
+    */ /*
     int column = 0;
     if (del) {
       column = cols[row-1];
@@ -298,6 +349,7 @@ public class QueenBoard {
     cols[row-2] = 0;
     */
     //return solve2(row-1,last,cols,true); // del becomes true because you want to start the next recursive call at cols+1
+    /*
     int[] newCols = new int[board.length];
     for (int i=0;i<board.length;i++) {
       if (getLastCol(i) != -1) {
@@ -306,6 +358,8 @@ public class QueenBoard {
     }
     return countSolutions2(getLastRow()-1,lastCol,newCols,true,count);
   }
+  /*
+  /*
 
   public int countSolutions3(int row, int lastCol, int[] cols, boolean del, int count) {
 
@@ -335,7 +389,7 @@ public class QueenBoard {
     } else {
       column = 0;
     }
-    */
+    *//*
 
     for (int col=column;col<board[row].length;col++) { // for every square in the row:
       System.out.println("testing: "+row+","+col);
@@ -368,6 +422,7 @@ public class QueenBoard {
     cols[row-2] = 0;
     */
     //return solve2(row-1,last,cols,true); // del becomes true because you want to start the next recursive call at cols+1
+    /*
     System.out.println("eNDremoving @ "+(rowStore)+", "+cols[rowStore-1]);
     removeQueen(row,cols[rowStore-1]);
     //col = cols[rowStore-1]; // store last because you need to know which col to start off in the prev row for next call.
@@ -440,6 +495,7 @@ public class QueenBoard {
 
 
   }
+  */
 
   /*
 
@@ -518,6 +574,7 @@ public class QueenBoard {
   */
 
   public int countSolutions() {
+
     for (int[] row: board) {
       for (int i: row) {
         if (i != 0) {
@@ -587,9 +644,11 @@ public class QueenBoard {
 
 
   public static void main(String[] args) {
-    QueenBoard q = new QueenBoard(8);
+    QueenBoard q = new QueenBoard(5);
+    System.out.println(q.solve());
+    q.resetBoard();
     //System.out.println(q.solve());
-    System.out.println(q.countSolutions());
+    System.out.println(q.solve2());
     System.out.println(q);
 
   }
