@@ -205,6 +205,15 @@ public class QueenBoard {
   }
 
     public int countSolutions() {
+
+      for (int[] row: board) {
+        for (int i: row) {
+          if (i != 0) {
+            throw new IllegalStateException("board must be cleared.");
+          }
+        }
+      }
+
       int[] cols = new int[board.length];
       return countSolutions(0,0,cols,false);
     }
@@ -260,6 +269,7 @@ public class QueenBoard {
     cols[row-2] = 0;
     */
     //return solve2(row-1,last,cols,true); // del becomes true because you want to start the next recursive call at cols+1
+    //resetBoard();
     return count;
   }
 
@@ -638,18 +648,19 @@ public class QueenBoard {
     cols[row-2] = 0;
     */
     //return solve2(row-1,last,cols,true); // del becomes true because you want to start the next recursive call at cols+1
-    resetBoard();
+    //resetBoard();
     return count;
   }
 
 
   public static void main(String[] args) {
-    QueenBoard q = new QueenBoard(15);
+    QueenBoard q = new QueenBoard(5);
     System.out.println(q.solve());
     q.resetBoard();
     //System.out.println(q.solve());
-    System.out.println(q.countSolutions());
+    System.out.println(q.countSolutions2());
     System.out.println(q);
+    System.out.println(q.countSolutions());
 
   }
 
