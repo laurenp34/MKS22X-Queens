@@ -213,6 +213,9 @@ public class QueenBoard {
           }
         }
       }
+      if (!solve()) {
+        return 0;
+      }
 
       int[] cols = new int[board.length];
       return countSolutions(0,0,cols,false);
@@ -593,6 +596,7 @@ public class QueenBoard {
       }
     }
 
+
     int[] cols = new int[board.length];
     //addQueen(0,0);
     return countSolutions2(0,0,cols,false);
@@ -654,11 +658,10 @@ public class QueenBoard {
 
 
   public static void main(String[] args) {
-    QueenBoard q = new QueenBoard(5);
+    QueenBoard q = new QueenBoard(4);
     System.out.println(q.solve());
     q.resetBoard();
     //System.out.println(q.solve());
-    System.out.println(q.countSolutions2());
     System.out.println(q);
     System.out.println(q.countSolutions());
 
