@@ -153,10 +153,10 @@ public class QueenBoard {
   }*/
 
   public boolean solve() {
-    addQueen(0,0);
+    //addQueen(0,0);
     int[] cols = new int[board.length];
-    cols[0] = 1;
-    return solve(1,0,cols,false);
+    //cols[0] = 1;
+    return solve(0,0,cols,false);
   }
 
   public boolean solve(int row, int lastCol, int[] cols, boolean del) {
@@ -166,6 +166,7 @@ public class QueenBoard {
     System.out.println(Arrays.toString(cols));
     System.out.println("row: "+row);
     */
+
 
 
     if (row == -1) {
@@ -190,14 +191,14 @@ public class QueenBoard {
       if (board[row][col] == 0) {
         //System.out.print("added\n");
         addQueen(row,col); // add the queen there.
-        cols[row-1] = col; // add the queens column to cols.
+        cols[row] = col; // add the queens column to cols.
         if (solve(row+1,col,cols,false)) {
           return true;
         }
-        //System.out.println("removing @ "+(row)+", "+cols[row-1]);
-        removeQueen(row,cols[row-1]);
-        col = cols[row-1]; // store last because you need to know which col to start off in the prev row for next call.
-        cols[row-1] = 0;
+        //System.out.println("removing @ "+(row)+", "+cols[row]);
+        removeQueen(row,cols[row]);
+        col = cols[row]; // store last because you need to know which col to start off in the prev row for next call.
+        cols[row] = 0;
       } // recursive call to next row, del is false because we didn't remove a queen.
 
     }
@@ -660,7 +661,27 @@ public class QueenBoard {
   }
 */
 
+//testcase must be a valid index of your input/output array
+public static void runTest(int i){
+  QueenBoard b;
+  int[]tests =   {1,2,3,4,5,8};
+  int[]answers = {1,0,0,2,10,92};
+  if(i >= 0 && i < tests.length ){
+    int size = tests[i];
+    int correct = answers[i];
+    b = new QueenBoard(size);
+    int ans  = b.countSolutions();
+
+    if(correct==ans){
+      System.out.println("PASS board size: "+tests[i]+" "+ans);
+    }else{
+      System.out.println("FAIL board size: "+tests[i]+" "+ans+" vs "+correct);
+    }
+  }
+}
+
   public static void main(String[] args) {
+    /*
     QueenBoard q = new QueenBoard(7);
     System.out.println(q.solve());
     q.resetBoard();
@@ -668,8 +689,14 @@ public class QueenBoard {
     System.out.println(q);
     System.out.println(q.countSolutions());
     System.out.println(q.countSolutions());
-    
+
     System.out.println(q);
+    */
+    QueenBoard q = new QueenBoard(4);
+    System.out.println(q.solve());
+    for (int i=0;i<6;i++) {
+      runTest(i);
+    }
 
   }
 
