@@ -692,8 +692,8 @@ public static void runTest(int i){
 
     System.out.println(q);
     */
-    QueenBoard q = new QueenBoard(4);
-    System.out.println(q.solve());
+    //QueenBoard q = new QueenBoard(4);
+    //System.out.println(q.solve());
     for (int i=0;i<6;i++) {
       runTest(i);
     }
